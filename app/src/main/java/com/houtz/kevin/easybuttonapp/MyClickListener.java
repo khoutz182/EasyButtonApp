@@ -22,7 +22,7 @@ public class MyClickListener implements View.OnClickListener {
         if(pageNum == 0) {
             mp = MediaPlayer.create(v.getContext(), R.raw.that_was_easy);
         } else if(pageNum == 1) {
-            mp = MediaPlayer.create(v.getContext(), R.raw.that_was_hard);
+            mp = MediaPlayer.create(v.getContext(), R.raw.that_was_easy);
         } else if(pageNum == 2) {
             mp = MediaPlayer.create(v.getContext(), R.raw.thats_what_she_said);
         } else {

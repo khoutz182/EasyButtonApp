@@ -4,19 +4,34 @@
     android:layout_height="fill_parent"
     android:id="@+id/MyScrollView"
     android:background="#FFFFFF">
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal|center_vertical">
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:weightSum="2"
+        android:orientation="vertical"
+        >
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/MyImageButton"
-            android:src="@drawable/easy_full"
+            android:src="@drawable/she_said_full"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            android:background="#FFFFFF" />
-    </RelativeLayout>
+            android:background="#FFFFFF"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:text="Record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/RecordButton"
+            android:enabled="true" />
+
+    </LinearLayout>
 
 </ScrollView>

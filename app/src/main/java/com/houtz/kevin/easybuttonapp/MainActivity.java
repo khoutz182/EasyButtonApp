@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity {
 
-    private static final int NUM_PAGES = 3;
+    private static final int NUM_PAGES = 4;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
 
