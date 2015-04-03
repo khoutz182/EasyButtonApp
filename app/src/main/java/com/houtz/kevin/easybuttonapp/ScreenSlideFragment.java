@@ -27,21 +27,17 @@ public class ScreenSlideFragment extends Fragment {
             R.layout.fragment_screen_slide_page, container, false
         );
 
-        if(rootView.getChildCount() > 0 && rootView.getChildAt(0) instanceof ImageButton) {
-            ImageButton button = (ImageButton)rootView.getChildAt(0);
-            button.setOnClickListener(new MyClickListener(pageNum));
-            switch(pageNum) {
-                case 0: button.setImageResource(R.drawable.easy_full);
-                    break;
-                case 1: button.setImageResource(R.drawable.hard_full);
-                    break;
-                case 2: button.setImageResource(R.drawable.she_said_full);
-                    break;
-                default: button.setImageResource(R.drawable.easy_full);
-                    break;
-            }
-
-
+        ImageButton button = (ImageButton)rootView.findViewById(R.id.MyImageButton);
+        button.setOnClickListener(new MyClickListener(pageNum));
+        switch(pageNum) {
+            case 0: button.setImageResource(R.drawable.easy_full);
+                break;
+            case 1: button.setImageResource(R.drawable.hard_full);
+                break;
+            case 2: button.setImageResource(R.drawable.she_said_full);
+                break;
+            default: button.setImageResource(R.drawable.easy_full);
+                break;
         }
 
         return rootView;
