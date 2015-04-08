@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/MyScrollView"
+    android:background="#FFFFFF">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/parent_layout"
+        android:layout_gravity="center_vertical|center_horizontal">
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/MyImageButton"
+            android:src="@drawable/she_said_full"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:background="#FFFFFF"
+
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/MyImageButton"
+            android:id="@+id/button_layout"
+            android:orientation="horizontal"
+            android:gravity="bottom">
+
+            <Button
+                android:text="Record"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/RecordButton"
+                android:enabled="true"
+                />
+
+            <Button
+                android:text="Change Image"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/ChangeImageButton"
+                android:enabled="true"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

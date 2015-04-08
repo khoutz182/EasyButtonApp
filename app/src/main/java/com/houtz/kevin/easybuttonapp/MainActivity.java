@@ -1,5 +1,6 @@
 package com.houtz.kevin.easybuttonapp;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +17,9 @@ public class MainActivity extends FragmentActivity {
     private static final int NUM_PAGES = 4;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
+    private Fragment lastPageFragment;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +60,14 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            ScreenSlideFragment frag = new ScreenSlideFragment();
+            Fragment frag = null;
+
+            if(position == getCount() - 1) {
+                frag = new ScreenSlideFragmentEnd();
+
+            } else {
+                frag = new ScreenSlideFragment();
+            }
             Bundle bundle = new Bundle();
             bundle.putInt("PAGE_NUM", new Integer(position));
             frag.setArguments(bundle);
