@@ -1,7 +1,9 @@
 package com.houtz.kevin.easybuttonapp;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ public class ScreenSlideFragmentEnd extends Fragment {
     private static final String TAG = "ScreenSlideFragmentEnd";
     private MediaRecorder mediaRecorder;
     private ImageButton customImageButton = null;
+    private SharedPreferences prefs;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -35,6 +38,9 @@ public class ScreenSlideFragmentEnd extends Fragment {
         Log.i(TAG, "HERE!");
         if(resultCode == getActivity().RESULT_OK && customImageButton != null) {
             Uri selectedImage = data.getData();
+            prefs.edit()
+                    .putString(Constants.DEFAULT_CUSTOM_IMAGE, selectedImage.toString())
+                    .commit();
             customImageButton.setImageURI(selectedImage);
         }
     }
@@ -47,9 +53,17 @@ public class ScreenSlideFragmentEnd extends Fragment {
                 R.layout.fragment_screen_slide_page_end, container, false
         );
 
+        prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String defaultImage = prefs.getString(Constants.DEFAULT_CUSTOM_IMAGE, null);
+
         ImageButton button = (ImageButton)rootView.findViewById(R.id.MyImageButton);
         button.setOnClickListener(new EasyButtonClickListener(-1));
         customImageButton = button;
+
+        if(defaultImage != null) {
+            button.setImageURI(Uri.parse(defaultImage));
+        }
+
 
         Button recordButton = (Button) rootView.findViewById(R.id.RecordButton);
         recordButton.setOnTouchListener(new RecordingListener());
