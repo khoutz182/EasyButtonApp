@@ -18,7 +18,6 @@ import java.io.File;
 public class RecordingListener implements View.OnTouchListener {
 
     private MainActivity mainActivity;
-    private boolean saveRecording = true;
     private MediaRecorder mediaRecorder;
     private static final String TAG = "MyRecordListener";
 
@@ -37,6 +36,7 @@ public class RecordingListener implements View.OnTouchListener {
 
         Button recordButton = (Button) mainActivity.findViewById(R.id.RecordButton);
         recordButton.setPressed(true);
+        recordButton.setText("Recording...");
 
         try {
             mediaRecorder.prepare();
@@ -60,6 +60,7 @@ public class RecordingListener implements View.OnTouchListener {
 
         Button recordButton = (Button) mainActivity.findViewById(R.id.RecordButton);
         recordButton.setPressed(false);
+        recordButton.setText("Record");
     }
 
     private void saveRecording() {
@@ -82,16 +83,13 @@ public class RecordingListener implements View.OnTouchListener {
             //start recording
             Log.i(TAG, "Start Recording");
             startRecording();
-        } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
             //stop recording
             Log.i(TAG, "Stop Recording");
             stopRecording();
-
-            if (saveRecording) {
-                saveRecording();
-            }
-            saveRecording = true;
-        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            Log.i(TAG, "Save recording");
+            saveRecording();
+        } else if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_CANCEL) {
             // cancel the recording and use the old one (don't overwrite)
             Log.i(TAG, "Stop Recording and don't save");
 
@@ -102,7 +100,6 @@ public class RecordingListener implements View.OnTouchListener {
 
             if(Math.abs(firstX - event.getX()) > MAX_DIFF || Math.abs(firstY - event.getY()) > MAX_DIFF) {
                 stopRecording();
-                saveRecording = false;
             }
         }
         return true;

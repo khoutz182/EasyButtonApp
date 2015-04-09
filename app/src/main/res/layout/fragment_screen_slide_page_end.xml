@@ -37,6 +37,7 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/RecordButton"
                 android:enabled="true"
+                android:drawableLeft="@android:drawable/ic_btn_speak_now"
                 />
 
             <Button
@@ -46,6 +47,7 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/ChangeImageButton"
                 android:enabled="true"
+                android:drawableLeft="@android:drawable/ic_menu_search"
                 />
         </LinearLayout>
 
