@@ -2,10 +2,9 @@ package com.houtz.kevin.easybuttonapp.listeners;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.View;
 
-import com.houtz.kevin.easybuttonapp.Constants;
+import com.houtz.kevin.easybuttonapp.constants.Constants;
 import com.houtz.kevin.easybuttonapp.R;
 
 /**

@@ -1,4 +1,4 @@
-package com.houtz.kevin.easybuttonapp;
+package com.houtz.kevin.easybuttonapp.animations;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;

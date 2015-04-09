@@ -1,4 +1,4 @@
-package com.houtz.kevin.easybuttonapp;
+package com.houtz.kevin.easybuttonapp.fragments;
 
 
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.houtz.kevin.easybuttonapp.R;
 import com.houtz.kevin.easybuttonapp.listeners.EasyButtonClickListener;
 
 /**

@@ -1,6 +1,5 @@
 package com.houtz.kevin.easybuttonapp;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.houtz.kevin.easybuttonapp.animations.ZoomOutPageTransformer;
+import com.houtz.kevin.easybuttonapp.fragments.ScreenSlideFragment;
+import com.houtz.kevin.easybuttonapp.fragments.ScreenSlideFragmentEnd;
 
 
 public class MainActivity extends FragmentActivity {

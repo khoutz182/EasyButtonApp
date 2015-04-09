@@ -1,4 +1,4 @@
-package com.houtz.kevin.easybuttonapp;
+package com.houtz.kevin.easybuttonapp.constants;
 
 import android.os.Environment;
 

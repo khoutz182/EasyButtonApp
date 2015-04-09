@@ -4,8 +4,11 @@ import android.media.MediaRecorder;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 
-import com.houtz.kevin.easybuttonapp.Constants;
+import com.houtz.kevin.easybuttonapp.constants.Constants;
+import com.houtz.kevin.easybuttonapp.MainActivity;
+import com.houtz.kevin.easybuttonapp.R;
 
 import java.io.File;
 
@@ -14,6 +17,7 @@ import java.io.File;
  */
 public class RecordingListener implements View.OnTouchListener {
 
+    private MainActivity mainActivity;
     private boolean saveRecording = true;
     private MediaRecorder mediaRecorder;
     private static final String TAG = "MyRecordListener";
@@ -25,9 +29,14 @@ public class RecordingListener implements View.OnTouchListener {
     private void startRecording() {
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mediaRecorder.setOutputFile(Constants.tempAudioFileName);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        mediaRecorder.setAudioEncodingBitRate(16);
+        mediaRecorder.setAudioSamplingRate(44100);
+
+        Button recordButton = (Button) mainActivity.findViewById(R.id.RecordButton);
+        recordButton.setPressed(true);
 
         try {
             mediaRecorder.prepare();
@@ -48,6 +57,9 @@ public class RecordingListener implements View.OnTouchListener {
             mediaRecorder.release();
             mediaRecorder = null;
         }
+
+        Button recordButton = (Button) mainActivity.findViewById(R.id.RecordButton);
+        recordButton.setPressed(false);
     }
 
     private void saveRecording() {
@@ -58,6 +70,10 @@ public class RecordingListener implements View.OnTouchListener {
         File fileDest = new File(Constants.mainAudioFileName);
         boolean success = file.renameTo(fileDest);
         Log.i(TAG, "success: " + success);
+    }
+
+    public void setMainActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
     @Override

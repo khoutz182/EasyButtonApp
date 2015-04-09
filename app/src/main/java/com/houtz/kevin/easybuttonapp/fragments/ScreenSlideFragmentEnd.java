@@ -1,4 +1,4 @@
-package com.houtz.kevin.easybuttonapp;
+package com.houtz.kevin.easybuttonapp.fragments;
 
 
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,8 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.houtz.kevin.easybuttonapp.constants.Constants;
+import com.houtz.kevin.easybuttonapp.MainActivity;
+import com.houtz.kevin.easybuttonapp.R;
 import com.houtz.kevin.easybuttonapp.listeners.EasyButtonClickListener;
 import com.houtz.kevin.easybuttonapp.listeners.RecordingListener;
+import com.houtz.kevin.easybuttonapp.utils.Utils;
+
+import java.io.File;
 
 import static android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
@@ -38,9 +43,10 @@ public class ScreenSlideFragmentEnd extends Fragment {
         Log.i(TAG, "HERE!");
         if(resultCode == getActivity().RESULT_OK && customImageButton != null) {
             Uri selectedImage = data.getData();
-            prefs.edit()
-                    .putString(Constants.DEFAULT_CUSTOM_IMAGE, selectedImage.toString())
-                    .commit();
+            SharedPreferences.Editor editor = prefs.edit();
+            String realPath = Utils.getRealPathFromURI(this.getActivity(), selectedImage);
+            editor.putString(Constants.DEFAULT_CUSTOM_IMAGE, realPath);
+            editor.commit();
             customImageButton.setImageURI(selectedImage);
         }
     }
@@ -61,12 +67,19 @@ public class ScreenSlideFragmentEnd extends Fragment {
         customImageButton = button;
 
         if(defaultImage != null) {
-            button.setImageURI(Uri.parse(defaultImage));
+            File f = new File(defaultImage);
+            if(f.exists() && f.isFile() && f.canRead()){
+                button.setImageURI(Uri.parse(defaultImage));
+            } else {
+                Log.i(TAG, "custom image file does not exist! using default...");
+            }
         }
 
 
         Button recordButton = (Button) rootView.findViewById(R.id.RecordButton);
-        recordButton.setOnTouchListener(new RecordingListener());
+        RecordingListener listener = new RecordingListener();
+        listener.setMainActivity((MainActivity)getActivity());
+        recordButton.setOnTouchListener(listener);
 
         Button imagePickButton = (Button) rootView.findViewById(R.id.ChangeImageButton);
         imagePickButton.setOnClickListener(new Button.OnClickListener() {
